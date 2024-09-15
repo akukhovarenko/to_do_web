@@ -1,8 +1,4 @@
 use super::base::Base;
-use super::traits::delete::Delete;
-use super::traits::edit::Edit;
-use super::traits::get::Get;
-use super::traits::item::Item;
 
 #[derive(Debug)]
 pub struct Done {
@@ -16,21 +12,6 @@ impl Done {
         }
     }
 }
-
-impl Item for Done {
-    fn get_title(&self) -> &str {
-        &self.super_struct.title
-    }
-    fn get_status(&self) -> &str {
-        &self.super_struct.status
-    }
-}
-
-impl Get for Done {}
-
-impl Edit for Done {}
-
-impl Delete for Done {}
 
 #[cfg(test)]
 mod done_test {

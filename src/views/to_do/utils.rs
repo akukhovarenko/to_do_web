@@ -1,6 +1,6 @@
 use crate::json_serialization::to_do_items::ToDoItems;
 use crate::to_do::to_do_factory;
-use diesel::{connection, prelude::*};
+use diesel::prelude::*;
 
 use crate::database::establish_connection;
 use crate::model::item::item::Item;
