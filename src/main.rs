@@ -1,8 +1,13 @@
+#[macro_use] extern crate diesel;
+extern crate dotenv;
 mod views;
 mod to_do;
 mod state;
 mod process;
 mod json_serialization;
+mod database;
+mod schema;
+mod model;
 
 use actix_web::{dev::Service, App, HttpServer};
 

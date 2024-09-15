@@ -1,14 +1,25 @@
-use super::utils::return_state;
-use crate::process::process_input;
-use crate::state::load_state_from_file;
-use crate::to_do::to_do_factory;
+use diesel::prelude::*;
+
 use actix_web::{HttpRequest, HttpResponse};
 
+use crate::database::establish_connection;
+use crate::model::item::new_item::NewItem;
+use crate::model::item::item::Item;
+use crate::schema::to_do;
+use super::utils::return_state;
+
 pub async fn create(req: HttpRequest) -> HttpResponse {
-    let state_file_name = "state.json";
-    let state = load_state_from_file(&state_file_name);
     let title = req.match_info().get("title").unwrap().to_string();
-    let item = to_do_factory("pending", &title).expect("msg");
-    process_input(item, "create".to_string(), state, state_file_name);
+    let mut connection = establish_connection();
+    let items = to_do::table
+        .filter(to_do::columns::title.eq(&title))
+        .order(to_do::columns::id.asc())
+        .load::<Item>(&mut connection)
+        .unwrap();
+    if items.len() == 0 {
+        let _ = diesel::insert_into(to_do::table).values(NewItem::new(title))
+            .execute(&mut connection);
+    }
+
     HttpResponse::Ok().json(return_state())
 }

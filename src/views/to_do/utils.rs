@@ -1,19 +1,22 @@
 use crate::json_serialization::to_do_items::ToDoItems;
-use crate::state::load_state_from_file;
 use crate::to_do::to_do_factory;
+use diesel::{connection, prelude::*};
 
+use crate::database::establish_connection;
+use crate::model::item::item::Item;
+use crate::schema::to_do;
 
 pub fn return_state() -> ToDoItems {
-    let state_file_name = "state.json";
-    let state = load_state_from_file(state_file_name);
+    let mut connection = establish_connection();
+    let items = to_do::table
+        .order(to_do::columns::id.asc())
+        .load::<Item>(&mut connection)
+        .unwrap();
+
     let mut buffer = Vec::new();
 
-    for (key, value) in state {
-        buffer.push(
-            to_do_factory(
-                value.as_str().unwrap(), 
-                &key).unwrap()
-        )
+    for item in items {
+        buffer.push(to_do_factory(&item.status, &item.title).unwrap())
     }
     ToDoItems::new(buffer)
 }
