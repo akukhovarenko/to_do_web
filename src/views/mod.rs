@@ -1,5 +1,4 @@
 use actix_web::web;
-mod hello;
 mod auth;
 mod to_do;
 mod app;
