@@ -1,6 +1,6 @@
 use crate::to_do::structs::base::Base;
 use crate::to_do::ItemTypes;
-use actix_web::{Responder, HttpResponse, http::header::ContentType, body::BoxBody};
+use actix_web::{body::BoxBody, http::header::ContentType, HttpResponse, Responder};
 use serde::Serialize;
 
 #[derive(Serialize)]

@@ -1,11 +1,11 @@
-use diesel::prelude::*;
 use actix_web::{web, HttpResponse};
+use diesel::prelude::*;
 
-use crate::json_serialization::to_do_item::ToDoItem;
+use super::utils::return_state;
 use crate::database::establish_connection;
+use crate::json_serialization::to_do_item::ToDoItem;
 use crate::model::item::item::Item;
 use crate::schema::to_do;
-use super::utils::return_state;
 
 pub async fn delete(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
     let mut connection = establish_connection();
@@ -15,8 +15,7 @@ pub async fn delete(to_do_item: web::Json<ToDoItem>) -> HttpResponse {
         .load::<Item>(&mut connection)
         .unwrap();
     for item in items {
-        let _ = diesel::delete(&item)
-            .execute(&mut connection);
+        let _ = diesel::delete(&item).execute(&mut connection);
     }
 
     HttpResponse::Ok().json(return_state())

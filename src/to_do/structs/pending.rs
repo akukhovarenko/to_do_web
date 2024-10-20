@@ -1,6 +1,5 @@
 use super::base::Base;
 
-
 #[derive(Debug)]
 pub struct Pending {
     pub super_struct: Base,

@@ -3,7 +3,6 @@ use std::path::Path;
 mod login;
 mod logout;
 
-
 pub fn auth_factory(app: &mut web::ServiceConfig) {
     let base_path = Path::new("/auth");
     app.route(

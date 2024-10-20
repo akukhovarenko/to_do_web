@@ -6,4 +6,5 @@ pub struct Item {
     pub id: i32,
     pub title: String,
     pub status: String,
+    pub user_id: i32,
 }

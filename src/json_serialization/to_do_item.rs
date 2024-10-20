@@ -1,13 +1,11 @@
-use actix_web::{Responder, HttpResponse, http::header::ContentType, body::BoxBody};
-use serde::{Serialize, Deserialize};
-
+use actix_web::{body::BoxBody, http::header::ContentType, HttpResponse, Responder};
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
 pub struct ToDoItem {
     pub title: String,
     pub status: String,
 }
-
 
 impl Responder for ToDoItem {
     type Body = BoxBody;
@@ -20,13 +18,15 @@ impl Responder for ToDoItem {
     }
 }
 
-
 #[cfg(test)]
 mod to_do_items_test {
 
     use super::ToDoItem;
     #[test]
-    fn new_test( ) {
-        ToDoItem{title: String::from("title"), status: String::from("pending")};
+    fn new_test() {
+        ToDoItem {
+            title: String::from("title"),
+            status: String::from("pending"),
+        };
     }
 }

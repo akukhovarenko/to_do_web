@@ -1,11 +1,12 @@
-#[macro_use] extern crate diesel;
+#[macro_use]
+extern crate diesel;
 extern crate dotenv;
-mod views;
-mod to_do;
-mod json_serialization;
 mod database;
-mod schema;
+mod json_serialization;
 mod model;
+mod schema;
+mod to_do;
+mod views;
 
 use actix_web::{dev::Service, App, HttpServer};
 
@@ -17,9 +18,9 @@ async fn main() -> std::io::Result<()> {
                 if req.path().contains("/item/") {
                     match views::token::process_token(&req) {
                         Ok(_token) => println!("Token ok"),
-                        Err(message) => println!("Token error: {}", message)
-                    }    
-                }  
+                        Err(message) => println!("Token error: {}", message),
+                    }
+                }
                 let fut = srv.call(req);
                 async {
                     let result = fut.await?;
