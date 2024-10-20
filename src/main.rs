@@ -7,6 +7,7 @@ mod model;
 mod schema;
 mod to_do;
 mod views;
+mod auth;
 
 use actix_web::{dev::Service, App, HttpServer};
 
@@ -16,7 +17,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap_fn(|req, srv| {
                 if req.path().contains("/item/") {
-                    match views::token::process_token(&req) {
+                    match auth::process_token(&req) {
                         Ok(_token) => println!("Token ok"),
                         Err(message) => println!("Token error: {}", message),
                     }

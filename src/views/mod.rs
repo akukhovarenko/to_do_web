@@ -3,7 +3,6 @@ use actix_web::web;
 mod app;
 mod auth;
 mod to_do;
-pub mod token;
 mod users;
 
 pub fn views_factory(app: &mut web::ServiceConfig) {

@@ -7,10 +7,39 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug Rust",
+            "name": "Debug executable 'to_do_web'",
             "cargo": {
-              "args": ["build", "--manifest-path", "${fileDirname}/../Cargo.toml"]
+                "args": [
+                    "build",
+                    "--bin=to_do_web",
+                    "--package=to_do_web"
+                ],
+                "filter": {
+                    "name": "to_do_web",
+                    "kind": "bin"
+                }
             },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'to_do_web'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=to_do_web",
+                    "--package=to_do_web"
+                ],
+                "filter": {
+                    "name": "to_do_web",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
