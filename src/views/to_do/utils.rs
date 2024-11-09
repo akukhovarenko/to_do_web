@@ -3,7 +3,7 @@ use crate::to_do::to_do_factory;
 use diesel::prelude::*;
 
 use crate::database::establish_connection;
-use crate::model::item::item::Item;
+use crate::models::item::Item;
 use crate::schema::to_do;
 
 pub fn return_state() -> ToDoItems {

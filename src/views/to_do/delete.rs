@@ -4,7 +4,7 @@ use diesel::prelude::*;
 use super::utils::return_state;
 use crate::database::establish_connection;
 use crate::json_serialization::to_do_item::ToDoItem;
-use crate::model::item::item::Item;
+use crate::models::item::Item;
 use crate::schema::to_do;
 
 pub async fn delete(to_do_item: web::Json<ToDoItem>) -> HttpResponse {

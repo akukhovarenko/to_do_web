@@ -4,8 +4,8 @@ use actix_web::{HttpRequest, HttpResponse};
 
 use super::utils::return_state;
 use crate::database::establish_connection;
-use crate::model::item::item::Item;
-use crate::model::item::new_item::NewItem;
+use crate::models::item::Item;
+use crate::models::item::new_item::NewItem;
 use crate::schema::to_do;
 
 pub async fn create(req: HttpRequest) -> HttpResponse {

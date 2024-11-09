@@ -1,3 +1,5 @@
+pub mod new_item;
+
 use crate::schema::to_do;
 
 #[derive(Queryable, Identifiable)]

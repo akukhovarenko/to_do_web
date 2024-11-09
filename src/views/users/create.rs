@@ -4,7 +4,7 @@ use actix_web::{web, HttpResponse};
 
 use crate::database::establish_connection;
 use crate::json_serialization::new_user::NewUserSchema;
-use crate::model::user::new_user::NewUser;
+use crate::models::user::new_user::NewUser;
 use crate::schema::users;
 
 pub async fn create(new_user: web::Json<NewUserSchema>) -> HttpResponse {

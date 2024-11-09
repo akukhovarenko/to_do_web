@@ -1,3 +1,9 @@
+if (localStorage.getItem("user-token") == null) {
+    window.location.replace(
+        document.location.origin + "/login"
+    );
+}
+
 function renderItems(items, processType, elementId, processFunction) {
     let placeholder = "<div>";
     let itemsMeta = [];
@@ -31,7 +37,7 @@ function apiCall(url, method) {
     });
     xhr.open(method, url);
     xhr.setRequestHeader('content-type', 'application/json');
-    xhr.setRequestHeader('user-token', 'token');
+    xhr.setRequestHeader('user-token', localStorage.getItem("user-token"));
     return xhr
 }
 

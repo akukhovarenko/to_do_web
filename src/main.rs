@@ -3,7 +3,7 @@ extern crate diesel;
 extern crate dotenv;
 mod database;
 mod json_serialization;
-mod model;
+mod models;
 mod schema;
 mod to_do;
 mod views;

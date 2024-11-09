@@ -1,3 +1,5 @@
+pub mod new_user;
+
 use bcrypt::verify;
 use diesel::{Identifiable, Queryable};
 
