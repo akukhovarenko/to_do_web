@@ -21,5 +21,5 @@ pub fn add_component(component_tag: String, html_data: String) -> String {
     let html_data = html_data.replace(html_tag.as_str(), &html_loaded);
     let html_data = html_data.replace(css_tag.as_str(), &css_loaded);
 
-    return html_data;
+    html_data
 }

@@ -16,7 +16,7 @@ pub async fn create(req: HttpRequest) -> HttpResponse {
         .order(to_do::columns::id.asc())
         .load::<Item>(&mut connection)
         .unwrap();
-    if items.len() == 0 {
+    if items.is_empty() {
         let _ = diesel::insert_into(to_do::table)
             .values(NewItem::new(title, 1))
             .execute(&mut connection);

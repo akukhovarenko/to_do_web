@@ -10,10 +10,10 @@ pub struct NewItem {
 
 impl NewItem {
     pub fn new(title: String, user_id: i32) -> NewItem {
-        return NewItem {
+        NewItem {
             title,
             status: String::from("pending"),
             user_id,
-        };
+        }
     }
 }

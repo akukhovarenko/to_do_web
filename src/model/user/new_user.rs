@@ -15,11 +15,11 @@ pub struct NewUser {
 
 impl NewUser {
     pub fn new(username: String, email: String, password: String) -> NewUser {
-        return NewUser {
+        NewUser {
             username,
             email,
             password: hash(password, DEFAULT_COST).unwrap(),
             unique_id: Uuid::new_v4().to_string(),
-        };
+        }
     }
 }

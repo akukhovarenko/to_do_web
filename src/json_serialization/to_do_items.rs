@@ -25,12 +25,12 @@ impl ToDoItems {
         }
         let done_items_count = done_items_buffer.len() as i8;
         let pending_items_count = pending_items_buffer.len() as i8;
-        return ToDoItems {
+        ToDoItems {
             pending_items: pending_items_buffer,
             done_items: done_items_buffer,
-            pending_items_count: pending_items_count,
-            done_items_count: done_items_count,
-        };
+            pending_items_count,
+            done_items_count,
+        }
     }
 }
 

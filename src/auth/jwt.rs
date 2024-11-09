@@ -18,8 +18,8 @@ impl JwtToken {
 
         let mut claims = BTreeMap::new();
         claims.insert("user_id", user_id);
-        let token_str = claims.sign_with_key(&key).unwrap();
-        token_str
+        
+        claims.sign_with_key(&key).unwrap()
     }
 
     pub fn decode(encoded_token: String) -> Result<JwtToken, &'static str> {
