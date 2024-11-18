@@ -2,6 +2,7 @@ extern crate hmac;
 extern crate jwt;
 extern crate sha2;
 
+use actix_web::HttpRequest;
 use hmac::{Hmac, Mac};
 use jwt::{SignWithKey, VerifyWithKey};
 use sha2::Sha256;
@@ -23,12 +24,18 @@ impl JwtToken {
     }
 
     pub fn decode(encoded_token: String) -> Result<JwtToken, &'static str> {
-        //-> Result<JwtToken, &'static str> {
         let key: Hmac<Sha256> = Hmac::new_from_slice(b"secret").unwrap();
         let token: Result<BTreeMap<String, i32>, jwt::Error> = encoded_token.verify_with_key(&key);
         match token {
             Ok(claims) => Ok(JwtToken {user_id: claims["user_id"], body: encoded_token}),
             Err(_) => Err("Token decode error")
+        }
+    }
+
+    pub fn decode_from_request(request: HttpRequest)-> Result<JwtToken, &'static str> {
+        match  request.headers().get("user-token") {
+            Some(token) => JwtToken::decode(String::from(token.to_str().unwrap())),
+            None => Err("There's no token")
         }
     }
 }

@@ -7,9 +7,9 @@ use actix_web::web;
 use std::path::Path;
 
 pub fn app_factory(app: &mut web::ServiceConfig) {
-    let base_path = Path::new("/");
-    app.route(base_path.to_str().unwrap(), web::get().to(items::items))
-        .route(
+    app.route("/", web::get().to(items::items));
+    let base_path = Path::new("/api/v1");
+    app.route(
             base_path.join("login").to_str().unwrap(),
             web::get().to(login::login),
         )

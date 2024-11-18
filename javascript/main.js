@@ -1,6 +1,6 @@
 if (localStorage.getItem("user-token") == null) {
     window.location.replace(
-        document.location.origin + "/login"
+        document.location.origin + '/api/v1/login'
     );
 }
 
@@ -35,7 +35,7 @@ function apiCall(url, method) {
             document.getElementById("pendingNum").innerHTML = JSON.parse(this.responseText)["pending_items_count"];
         }
     });
-    xhr.open(method, url);
+    xhr.open(method, "/api/v1" + url);
     xhr.setRequestHeader('content-type', 'application/json');
     xhr.setRequestHeader('user-token', localStorage.getItem("user-token"));
     return xhr
@@ -59,6 +59,7 @@ function getItems() {
     let call = apiCall("/item/get", "GET");
     call.send();
 }
+
 getItems();
 document.getElementById("create-button").addEventListener("click", createItem);
 

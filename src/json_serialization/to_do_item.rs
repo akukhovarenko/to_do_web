@@ -20,12 +20,13 @@ impl Responder for ToDoItem {
 
 #[cfg(test)]
 mod to_do_items_test {
-    
+    use super::ToDoItem;
 
-
-    
     #[test]
     fn new_test() {
-        String::from("title");String::from("pending");
+        ToDoItem {
+            title: String::from("title"),
+            status: String::from("pending"),
+        };
     }
 }

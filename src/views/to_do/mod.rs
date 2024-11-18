@@ -7,7 +7,7 @@ mod get;
 mod utils;
 
 pub fn item_factory(app: &mut web::ServiceConfig) {
-    let base_path = Path::new("/item");
+    let base_path = Path::new("/api/v1/item");
     app.route(
         base_path.join("get").to_str().unwrap(),
         web::get().to(get::get),

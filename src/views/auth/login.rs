@@ -10,7 +10,8 @@ use crate::schema::users;
 pub async fn login(credentials: web::Json<Login>) -> impl Responder {
     let username = credentials.username.clone();
     let password = credentials.password.clone();
-
+    println!("User login {}", username);
+ 
     let mut connection = establish_connection();
     let users = users::table
         .filter(users::columns::username.eq(username.as_str()))
