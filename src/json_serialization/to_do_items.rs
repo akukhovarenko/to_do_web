@@ -2,6 +2,7 @@ use crate::to_do::structs::base::Base;
 use crate::to_do::ItemTypes;
 use actix_web::{body::BoxBody, http::header::ContentType, HttpResponse, Responder};
 use serde::Serialize;
+use crate::auth::jwt::JwtToken;
 
 #[derive(Serialize)]
 pub struct ToDoItems {
@@ -10,10 +11,11 @@ pub struct ToDoItems {
 
     pub pending_items_count: i8,
     pub done_items_count: i8,
+    pub user_id: i32,
 }
 
 impl ToDoItems {
-    pub fn new(items: Vec<ItemTypes>) -> ToDoItems {
+    pub fn new(items: Vec<ItemTypes>, user_id: i32) -> ToDoItems {
         let mut pending_items_buffer = Vec::new();
         let mut done_items_buffer = Vec::new();
 
@@ -30,6 +32,7 @@ impl ToDoItems {
             done_items: done_items_buffer,
             pending_items_count,
             done_items_count,
+            user_id,
         }
     }
 }
@@ -60,8 +63,8 @@ mod to_do_items_test {
             ItemTypes::Pending(Pending::new("pending_title_2")),
             ItemTypes::Done(Done::new("done_title_1")),
             ItemTypes::Done(Done::new("done_title_2")),
-            ItemTypes::Done(Done::new("done_title_3")),
-        ]);
+            ItemTypes::Done(Done::new("done_title_3"), ),
+        ], 123);
         assert_eq!(items.pending_items.len() as i8, items.pending_items_count);
         assert_eq!(items.done_items.len() as i8, items.done_items_count);
         assert_eq!(items.pending_items_count, 2);

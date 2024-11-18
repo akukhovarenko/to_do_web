@@ -21,7 +21,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .wrap_fn(|req, srv| {
-                let request_url: String = String::from(*&req.uri().path().clone());
+                let request_url: String = String::from(*&req.uri().path());
                 let passed: bool;
                 if req.path().contains("/item/") {
                     match auth::process_token(&req) {

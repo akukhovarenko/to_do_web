@@ -19,5 +19,5 @@ pub fn return_state(user_id: &i32) -> ToDoItems {
     for item in items {
         buffer.push(to_do_factory(&item.status, &item.title).unwrap())
     }
-    ToDoItems::new(buffer)
+    ToDoItems::new(buffer, *user_id)
 }

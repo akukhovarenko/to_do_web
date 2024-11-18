@@ -26,13 +26,14 @@ function apiCall(url, method) {
     xhr.withCredentials = true;
     xhr.addEventListener('readystatechange', function () {
         if (this.readyState == this.LOADING) {
-            console.log( Date.now() + "Show loading gif");
+            console.log(Date.now() + "Show loading gif");
         }
         if (this.readyState == this.DONE) {
             renderItems(JSON.parse(this.responseText)["pending_items"], "Edit", "pendingItems", editItem);
             renderItems(JSON.parse(this.responseText)["done_items"], "Delete", "doneItems", deleteItem);
             document.getElementById("completeNum").innerHTML = JSON.parse(this.responseText)["done_items_count"];
             document.getElementById("pendingNum").innerHTML = JSON.parse(this.responseText)["pending_items_count"];
+            document.getElementById("currentUser").innerHTML = JSON.parse(this.responseText)["user_id"];
         }
     });
     xhr.open(method, "/api/v1" + url);
@@ -55,6 +56,11 @@ function deleteItem() {
     call.send(JSON.stringify(json));
 }
 
+function logout() {
+    localStorage.removeItem('user-token');
+    window.location.replace(document.location.origin);
+}
+
 function getItems() {
     let call = apiCall("/item/get", "GET");
     call.send();
@@ -62,6 +68,7 @@ function getItems() {
 
 getItems();
 document.getElementById("create-button").addEventListener("click", createItem);
+document.getElementById("logout-button").addEventListener("click", logout);
 
 function createItem() {
     let title = document.getElementById("name");
